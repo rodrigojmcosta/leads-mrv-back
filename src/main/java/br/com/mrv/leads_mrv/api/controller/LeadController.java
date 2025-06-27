@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.mrv.leads_mrv.api.dto.LeadsAcceptedDto;
 import br.com.mrv.leads_mrv.api.dto.LeadsInvitedDto;
+import br.com.mrv.leads_mrv.api.dto.MailFileResponse;
 import br.com.mrv.leads_mrv.api.mapper.LeadMapper;
 import br.com.mrv.leads_mrv.domain.enums.LeadStatusEnum;
 import br.com.mrv.leads_mrv.domain.model.Lead;
@@ -39,9 +40,9 @@ public class LeadController {
   }
 
   @PutMapping("/{id}/accept")
-  public ResponseEntity<LeadsAcceptedDto> acceptLead(@PathVariable Long id) {
-    Lead lead = leadService.acceptLead(id);
-    return ResponseEntity.ok(leadMapper.toAcceptedDto(lead));
+  public ResponseEntity<MailFileResponse> acceptLead(@PathVariable Long id) {
+    MailFileResponse response = leadService.acceptLead(id);
+    return ResponseEntity.ok(response);
   }
 
   @PutMapping("/{id}/decline")
