@@ -4,10 +4,10 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import br.com.mrv.leads_mrv.domain.enums.LeadStatusEnum;
+import br.com.mrv.leads_mrv.domain.enums.LeadStatusEnumConverter;
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -44,7 +44,7 @@ public class Lead {
     @Column(name = "CONTACT_EMAIL")
     private String contactEmail;
 
-    @Column(name = "DATE_CREATED", nullable = false, updatable = false  )
+    @Column(name = "DATE_CREATED", nullable = false, updatable = false)
     private LocalDateTime dateCreated;
 
     @Column(name = "SUBURB")
@@ -59,8 +59,8 @@ public class Lead {
     @Column(name = "PRICE", precision = 10, scale = 2)
     private BigDecimal price;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "STATUS", nullable = false)
+    @Convert(converter = LeadStatusEnumConverter.class)
     private LeadStatusEnum status;
 
     @PrePersist
